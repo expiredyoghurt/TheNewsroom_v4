@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <style>
+    .badge-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 800;
+      font-size: 8px;
+      letter-spacing: 0.5px;
+      fill: #FFFFFF;
+      text-anchor: middle;
+    }
+  </style>
+  <rect width="64" height="64" rx="14" fill="#0D9488"/>
+  <path d="M32 16a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-8 9.5h16a8.1 8.1 0 0 1-1.8 4.5h-12.4a8.1 8.1 0 0 1-1.8-4.5zm8-7.5a8 8 0 0 1 3 1.8h-6a8 8 0 0 1 3-1.8zm-5.8 3.3h11.6a8.1 8.1 0 0 1 2 2.7h-15.6a8.1 8.1 0 0 1 2-2.7zm-2 9.2h15.6a8.1 8.1 0 0 1-2 2.7h-11.6a8.1 8.1 0 0 1-2-2.7zm7.8 7.5a8 8 0 0 1-3-1.8h6a8 8 0 0 1-3 1.8z" fill="#FFFFFF"/>
+  <text x="32" y="52" class="badge-text">WORLD</text>
+</svg>

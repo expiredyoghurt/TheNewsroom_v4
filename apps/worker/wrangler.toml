@@ -1,0 +1,51 @@
+name = "the-newsroom"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Structured platform logs from the very first deploy (not an afterthought).
+[observability]
+enabled = true
+
+# One origin: the Worker serves the API and the built SPA. API paths run the Worker first.
+[assets]
+directory = "../web/dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+# No resource IDs on purpose: `wrangler deploy` auto-provisions D1/KV/R2 by binding name
+# (see scripts/setup.mjs). Nothing to copy-paste by hand.
+[[d1_databases]]
+binding = "DB"
+database_name = "newsroom-db"
+migrations_dir = "migrations"
+
+[[kv_namespaces]]
+binding = "SESSIONS"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "newsroom-media"
+
+# Workers AI is the last AI provider before the non-AI fallback.
+[ai]
+binding = "AI"
+
+# Coarse per-location guards. Per-account throttling lives in D1 (strongly consistent).
+[[ratelimits]]
+name = "AUTH_LIMITER"
+namespace_id = "1001"
+[ratelimits.simple]
+limit = 20
+period = 60
+
+[[ratelimits]]
+name = "SUBMIT_LIMITER"
+namespace_id = "1002"
+[ratelimits.simple]
+limit = 30
+period = 60
+
+# Secrets (set by scripts/setup.mjs, never committed):
+#   OPENROUTER_API_KEY, GEMINI_API_KEY_1, GEMINI_API_KEY_2, GROQ_API_KEY_1, GROQ_API_KEY_2
